@@ -1,29 +1,48 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+const LinkItem = props => (
+    <a 
+    className="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger" 
+    href={props.link.url}
+    target="_blank"
+    >{props.link.title}</a> 
+  )
 
 export default class Main extends Component {
   
     constructor(props) {
         super(props);
+        
+        this.state = {user: [],links: []};
     
-        ///this.deleteExercise = this.deleteExercise.bind(this)
-    
-        this.state = {user: []};
       }
     componentDidMount() {
         axios.get(process.env.REACT_APP_URL+'/users/datcal')
           .then(response => {
-              console.log(response);
             this.setState({ user: response.data })
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+
+          axios.get(process.env.REACT_APP_URL+'/links/datcal')
+          .then(response => {
+            this.setState({ links: response.data })
           })
           .catch((error) => {
             console.log(error);
           })
       }
 
+      LinkList() {
+        return this.state.links.map(currentlink => {
+          return <LinkItem link={currentlink}  key={currentlink._id}/>;
+        })
+      }
+
   render() {
-      console.log(this.state);
     return (
       <div>
           <div className="wrapper">
@@ -37,10 +56,8 @@ export default class Main extends Component {
           </div>
           <div className="buttons">
               <div className="mb-2 mt-2 text-center">
-                  <a  className="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
-                  <a  className="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
-                  <a  className="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
-                  <a  className="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
+              { this.LinkList() }
+               
               </div>
           </div>
       </div>
