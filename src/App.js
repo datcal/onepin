@@ -6,6 +6,7 @@ import "./App.css";
 import Main from './components/main';
 
 function App() {
+  console.log(process.env);
   return (
     <Router>
       <Route path="/" exact component={Main} />
