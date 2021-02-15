@@ -8,7 +8,7 @@ export default class Main extends Component {
       <div>
           <div class="wrapper">
             <div class="resim">
-                <img src="./images/loginbg.jpg" />
+                <img src="https://fakeimg.pl/200x200" />
             </div>
             <h1 class="text-center">Burak Hamza <i class="fa fa-check-circle" aria-hidden="true"></i></h1>
             <h4 class="text-center">@datcal</h4>
