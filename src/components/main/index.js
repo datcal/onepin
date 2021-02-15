@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const LinkItem = props => (
@@ -14,12 +13,12 @@ export default class Main extends Component {
   
     constructor(props) {
         super(props);
-        
         this.state = {user: [],links: []};
-    
       }
+      
     componentDidMount() {
-        axios.get(process.env.REACT_APP_URL+'/users/datcal')
+        const username = this.props.match.params.username;
+        axios.get(process.env.REACT_APP_URL+'/users/'+username)
           .then(response => {
             this.setState({ user: response.data })
           })
@@ -27,7 +26,7 @@ export default class Main extends Component {
             console.log(error);
           })
 
-          axios.get(process.env.REACT_APP_URL+'/links/datcal')
+          axios.get(process.env.REACT_APP_URL+'/links/'+username)
           .then(response => {
             this.setState({ links: response.data })
           })
