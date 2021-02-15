@@ -11,7 +11,6 @@ function App() {
   return (
     <Router>
       <Route path="/:username" exact component={Main} />
-      <Route path="/" component={HomePage} />
     </Router>
    
   );
