@@ -21,7 +21,6 @@ export default class Main extends Component {
                   <a href="javascript:;" class="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
                   <a href="javascript:;" class="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
                   <a href="javascript:;" class="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
-                  <a href="javascript:;" class="d-block rounded-0 mt-2 mb-2 pt-2 pb-2 w-100 btn btn-danger">My Portfolio</a>
               </div>
           </div>
       </div>
