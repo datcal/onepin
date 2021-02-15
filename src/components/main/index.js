@@ -13,26 +13,32 @@ export default class Main extends Component {
   
     constructor(props) {
         super(props);
-        this.state = {user: [],links: []};
+        this.state = {user: [],links: [],render:false};
       }
-      
+
     componentDidMount() {
         const username = this.props.match.params.username;
-        axios.get(process.env.REACT_APP_URL+'/users/'+username)
+        if(username != 'index'){
+          axios.get(process.env.REACT_APP_URL+'/users/'+username)
           .then(response => {
-            this.setState({ user: response.data })
+            this.setState({ user: response.data,render: true })
           })
           .catch((error) => {
+            this.setState({ render: false })
             console.log(error);
           })
 
           axios.get(process.env.REACT_APP_URL+'/links/'+username)
           .then(response => {
-            this.setState({ links: response.data })
+            this.setState({ links: response.data,render: true })
           })
           .catch((error) => {
+            this.setState({ render: false })
             console.log(error);
           })
+        }
+        
+        
       }
 
       LinkList() {
@@ -42,24 +48,45 @@ export default class Main extends Component {
       }
 
   render() {
-    return (
-      <div>
-          <div className="wrapper">
-            <div className="resim">
-                <img src={this.state.user.image} />
+    if(this.state.user === null){ 
+        return (
+            <div>
+                <div className="wrapper">
+                     Home Page
+                </div>
             </div>
-            <h1 className="text-center">{this.state.user.flname} <i className="fa fa-check-circle" aria-hidden="true"></i></h1>
-            <h4 className="text-center">@{this.state.user.username}</h4>
-            <p className="text-center mt-4">{this.state.user.description}</p>
+          )
+    }
 
-          </div>
-          <div className="buttons">
-              <div className="mb-2 mt-2 text-center">
-              { this.LinkList() }
-               
-              </div>
-          </div>
-      </div>
-    )
+    if(this.state.render == true){
+        return (
+            <div>
+                <div className="wrapper">
+                  <div className="resim">
+                      <img src={this.state.user.image} />
+                  </div>
+                  <h1 className="text-center">{this.state.user.flname} <i className="fa fa-check-circle" aria-hidden="true"></i></h1>
+                  <h4 className="text-center">@{this.state.user.username}</h4>
+                  <p className="text-center mt-4">{this.state.user.description}</p>
+      
+                </div>
+                <div className="buttons">
+                    <div className="mb-2 mt-2 text-center">
+                    { this.LinkList() }
+                     
+                    </div>
+                </div>
+            </div>
+          )
+    }else{
+        return (
+            <div>
+                <div className="wrapper">
+                     Home Page
+                </div>
+            </div>
+          )
+    }
+    
   }
 }
