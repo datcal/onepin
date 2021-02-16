@@ -18,7 +18,7 @@ const Form = (props) => {
     return (
         <section className="login">
             <div className="loginContainer">
-                <label>Username</label>
+                <label>E-Mail</label>
                 <input 
                     type="text" 
                     autoFocus 
