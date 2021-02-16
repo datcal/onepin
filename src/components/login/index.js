@@ -100,7 +100,7 @@ useEffect(() => {
   return (
     <div className="App">
       {user ? (
-        <Profile />
+        <Profile handleLogout={handleLogout} />
       ):(
         <Form 
           email={email} 
