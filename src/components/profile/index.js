@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-export default class HomePage extends Component { 
+export default class Profile extends Component { 
   render() {
         return (
             <div>
                 <div className="wrapper">
-                    One Pin Home Page
+                    Profile
                 </div>
             </div>
         )
