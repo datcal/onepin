@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Login from '../login';
+import HomePage from '../homepage';
 
 const LinkItem = props => (
     <a 
@@ -13,12 +15,16 @@ export default class Main extends Component {
   
     constructor(props) {
         super(props);
-        this.state = {user: [],links: [],render:false};
+        this.state = {user: [],links: [],render:false,username : ''};
       }
 
     componentDidMount() {
         const username = this.props.match.params.username;
-        if(username != 'index'){
+        console.log(username);
+        const otherPages = ["index", "auth"];
+        const isOtherPage = otherPages.indexOf(username);
+        this.setState({username});
+        if(isOtherPage < 0){
           axios.get(process.env.REACT_APP_URL+'/users/'+username)
           .then(response => {
             this.setState({ user: response.data,render: true })
@@ -48,7 +54,7 @@ export default class Main extends Component {
       }
 
   render() {
-    if(this.state.user === null){ 
+    /*if(this.state.user === null){ 
         return (
             <div>
                 <div className="wrapper">
@@ -56,9 +62,9 @@ export default class Main extends Component {
                 </div>
             </div>
           )
-    }
+    }*/
 
-    if(this.state.render == true){
+    if(this.state.render === true){
         return (
             <div>
                 <div className="wrapper">
@@ -79,13 +85,24 @@ export default class Main extends Component {
             </div>
           )
     }else{
-        return (
-            <div>
-                <div className="wrapper">
-                     Home Page
-                </div>
-            </div>
-          )
+  
+   
+        switch (this.state.username) {
+          default:
+          case 'index':
+            return (
+              <HomePage props={this.props} />
+            )
+            break;
+        
+          case 'auth':
+            return (
+              <Login />
+            )
+            break;
+        }
+
+        
     }
     
   }

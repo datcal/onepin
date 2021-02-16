@@ -7,10 +7,11 @@ import Main from './components/main';
 import HomePage from './components/homepage';
 
 function App() {
-  console.log(process.env);
+  //console.log(process.env);
   return (
     <Router>
-      <Route path="/:username" exact component={Main} />
+      <Route path="/" exact component={HomePage} />
+      <Route path="/:username" component={Main} />
     </Router>
    
   );
